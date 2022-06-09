@@ -108,7 +108,14 @@ class Vditor extends VditorMethod {
             setCodeTheme(codeTheme, this.vditor.options.cdn);
         }
     }
-
+    /** 获取 this.vditor 实例 */
+    public getInstance() {
+        return this.vditor
+    }
+    /** 获取 element */
+    public getElement() {
+        return this.vditor.element
+    }
     /** 获取 Markdown 内容 */
     public getValue() {
         return getMarkdown(this.vditor);
@@ -502,7 +509,7 @@ class Vditor extends VditorMethod {
             initUI(this.vditor);
 
             if (mergedOptions.after) {
-                mergedOptions.after();
+                mergedOptions.after.call(this);
             }
             if (mergedOptions.icon) {
                 // 防止初始化 2 个编辑器时加载 2 次

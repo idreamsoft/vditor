@@ -109,7 +109,7 @@ export const processAfterRender = (vditor: IVditor, options = {
 
     const text = getMarkdown(vditor);
     if (typeof vditor.options.input === "function" && options.enableInput) {
-        vditor.options.input(text);
+        vditor.options.input(text, vditor);
     }
 
     if (vditor.options.counter.enable) {

@@ -654,13 +654,13 @@ interface IOptions {
     after?(): void;
 
     /** 输入后触发 */
-    input?(value: string): void;
+    input?(value: string,vditor: object): void;
 
     /** 聚焦后触发  */
-    focus?(value: string): void;
+    focus?(value: string,vditor: object): void;
 
     /** 失焦后触发 */
-    blur?(value: string): void;
+    blur?(value: string,vditor: object): void;
 
     /** `esc` 按下后触发 */
     esc?(value: string): void;

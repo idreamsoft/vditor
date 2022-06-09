@@ -20,7 +20,7 @@ import {getCursorPosition, getEditorRange} from "./selection";
 export const focusEvent = (vditor: IVditor, editorElement: HTMLElement) => {
     editorElement.addEventListener("focus", () => {
         if (vditor.options.focus) {
-            vditor.options.focus(getMarkdown(vditor));
+            vditor.options.focus(getMarkdown(vditor),vditor);
         }
         hidePanel(vditor, ["subToolbar", "hint"]);
     });
@@ -47,7 +47,7 @@ export const blurEvent = (vditor: IVditor, editorElement: HTMLElement) => {
         }
         vditor[vditor.currentMode].range = getEditorRange(vditor);
         if (vditor.options.blur) {
-            vditor.options.blur(getMarkdown(vditor));
+            vditor.options.blur(getMarkdown(vditor),vditor);
         }
     });
 };
