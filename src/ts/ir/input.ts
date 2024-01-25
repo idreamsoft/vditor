@@ -53,7 +53,7 @@ export const input = (vditor: IVditor, range: Range, ignoreSpace = false, event?
 
         if (startSpace) {
             if (typeof vditor.options.input === "function") {
-                vditor.options.input(getMarkdown(vditor));
+                vditor.options.input(getMarkdown(vditor),vditor);
             }
             return;
         }
@@ -68,7 +68,7 @@ export const input = (vditor: IVditor, range: Range, ignoreSpace = false, event?
                     previousNode.classList.remove("vditor-ir__node--expand");
                 }
                 if (typeof vditor.options.input === "function") {
-                    vditor.options.input(getMarkdown(vditor));
+                    vditor.options.input(getMarkdown(vditor),vditor);
                 }
                 return;
             }

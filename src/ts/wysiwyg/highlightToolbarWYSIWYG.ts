@@ -282,7 +282,7 @@ export const highlightToolbarWYSIWYG = (vditor: IVditor) => {
                     }
                 }
                 if (typeof vditor.options.input === "function") {
-                    vditor.options.input(getMarkdown(vditor));
+                    vditor.options.input(getMarkdown(vditor),vditor);
                 }
             };
 
@@ -579,7 +579,7 @@ export const highlightToolbarWYSIWYG = (vditor: IVditor) => {
                     footnotesRefElement.setAttribute("data-footnotes-label", input.value);
                 }
                 if (typeof vditor.options.input === "function") {
-                    vditor.options.input(getMarkdown(vditor));
+                    vditor.options.input(getMarkdown(vditor),vditor);
                 }
             };
             input.onkeydown = (event) => {
@@ -716,7 +716,7 @@ export const highlightToolbarWYSIWYG = (vditor: IVditor) => {
             input.oninput = () => {
                 headingElement.setAttribute("data-id", input.value);
                 if (typeof vditor.options.input === "function") {
-                    vditor.options.input(getMarkdown(vditor));
+                    vditor.options.input(getMarkdown(vditor),vditor);
                 }
             };
             input.onkeydown = (event) => {
@@ -813,7 +813,7 @@ export const genLinkRefPopover = (vditor: IVditor, linkRefElement: HTMLElement, 
             linkRefElement.setAttribute("data-link-label", input1.value);
         }
         if (typeof vditor.options.input === "function") {
-            vditor.options.input(getMarkdown(vditor));
+            vditor.options.input(getMarkdown(vditor),vditor);
         }
     };
 
@@ -1069,7 +1069,7 @@ export const genImagePopover = (event: Event, vditor: IVditor) => {
         imgElement.setAttribute("alt", alt.value);
         imgElement.setAttribute("title", title.value);
         if (typeof vditor.options.input === "function") {
-            vditor.options.input(getMarkdown(vditor));
+            vditor.options.input(getMarkdown(vditor),vditor);
         }
     };
 

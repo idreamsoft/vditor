@@ -391,7 +391,7 @@ class WYSIWYG {
                 || endSpace || isHeadingMD(blockElement.innerHTML) ||
                 (isHrMD(blockElement.innerHTML) && blockElement.previousElementSibling)) {
                 if (typeof vditor.options.input === "function") {
-                    vditor.options.input(getMarkdown(vditor));
+                    vditor.options.input(getMarkdown(vditor),vditor);
                 }
                 return;
             }
