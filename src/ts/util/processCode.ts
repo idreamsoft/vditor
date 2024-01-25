@@ -6,6 +6,7 @@ import {graphvizRender} from "../markdown/graphvizRender";
 import {highlightRender} from "../markdown/highlightRender";
 import {mathRender} from "../markdown/mathRender";
 import {mermaidRender} from "../markdown/mermaidRender";
+import {markmapRender} from "../markdown/markmapRender";
 import {mindmapRender} from "../markdown/mindmapRender";
 import {plantumlRender} from "../markdown/plantumlRender";
 
@@ -62,13 +63,12 @@ export const processCodeRender = (previewPanel: HTMLElement, vditor: IVditor) =>
         return;
     }
     const language = previewPanel.firstElementChild.className.replace("language-", "");
-    if (!language) {
-        return;
-    }
     if (language === "abc") {
         abcRender(previewPanel, vditor.options.cdn);
     } else if (language === "mermaid") {
         mermaidRender(previewPanel, vditor.options.cdn, vditor.options.theme);
+    } else if (language === "markmap") {
+        markmapRender(previewPanel, vditor.options.cdn, vditor.options.theme);
     } else if (language === "flowchart") {
         flowchartRender(previewPanel, vditor.options.cdn);
     } else if (language === "echarts") {
@@ -82,8 +82,16 @@ export const processCodeRender = (previewPanel: HTMLElement, vditor: IVditor) =>
     } else if (language === "math") {
         mathRender(previewPanel, {cdn: vditor.options.cdn, math: vditor.options.preview.math});
     } else {
-        highlightRender(Object.assign({}, vditor.options.preview.hljs), previewPanel, vditor.options.cdn);
-        codeRender(previewPanel);
+        const cRender = vditor.options.customRenders.find((item) => {
+            if (item.language === language) {
+                item.render(previewPanel, vditor);
+                return true
+            }
+        })
+        if (!cRender) {
+            highlightRender(Object.assign({}, vditor.options.preview.hljs), previewPanel, vditor.options.cdn);
+            codeRender(previewPanel);
+        }
     }
 
     previewPanel.setAttribute("data-render", "1");

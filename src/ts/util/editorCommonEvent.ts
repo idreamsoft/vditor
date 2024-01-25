@@ -29,7 +29,11 @@ export const focusEvent = (vditor: IVditor, editorElement: HTMLElement) => {
 export const dblclickEvent = (vditor: IVditor, editorElement: HTMLElement) => {
     editorElement.addEventListener("dblclick", (event: MouseEvent & { target: HTMLElement }) => {
         if (event.target.tagName === "IMG") {
-            previewImage(event.target as HTMLImageElement, vditor.options.lang, vditor.options.theme);
+            if (vditor.options.image.preview) {
+                vditor.options.image.preview(event.target);
+            } else if (vditor.options.image.isPreview) {
+                previewImage(event.target as HTMLImageElement, vditor.options.lang, vditor.options.theme);
+            }
         }
     });
 };
@@ -110,6 +114,9 @@ export const scrollCenter = (vditor: IVditor) => {
 
 export const hotkeyEvent = (vditor: IVditor, editorElement: HTMLElement) => {
     editorElement.addEventListener("keydown", (event: KeyboardEvent & { target: HTMLElement }) => {
+        if (!event.isComposing && vditor.options.keydown) {
+            vditor.options.keydown(event);
+        }
         // hint: 上下选择
         if ((vditor.options.hint.extend.length > 1 || vditor.toolbar.elements.emoji) &&
             vditor.hint.select(event, vditor)) {
